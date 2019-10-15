@@ -34,7 +34,7 @@ services:
  
   burrow-exporter:
     build: ./burrow_exporter
-    image: "chenchuk/burrow_exportes:1.0"
+    image: chenchuk/burrow_exportes:1.0
     ports:
       - 8880:8880
     environment:
@@ -45,4 +45,17 @@ services:
     depends_on:
       - burrow
  
+  prometheus:
+    image: prom/prometheus:latest
+    #container_name: kms-prometheus
+    ports:
+      - 9090:9090
+    volumes:
+      - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+    depends_on:
+      - burrow-exporter
+      - kafka-minion
+
+
+
 
