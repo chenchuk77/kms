@@ -1,0 +1,16 @@
+version: "3"
+services:
+  burrow:
+    build:
+      context: ./Burrow
+      args:
+        BURROW_KAFKA_BROKERS: '[ "192.168.2.67:9092", "192.168.2.67:9093", "192.168.2.67:9094" ]'
+        BURROW_ZK_CONN: '[ "192.168.2.67:2181", "192.168.2.67:2182", "192.168.2.67:2183" ]'
+    image: "chenchuk/burrow:1.0"
+    volumes:
+      - ${PWD}/Burrow/docker-config:/etc/burrow/
+      - ${PWD}/Burrow/tmp:/var/tmp/burrow
+    ports:
+      - 8000:8000
+    restart: always
+
