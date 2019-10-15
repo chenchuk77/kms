@@ -9,8 +9,8 @@ RUN go build burrow-exporter.go
 
 FROM alpine
 COPY --from=glide /go/src/github.com/jirwin/burrow_exporter/burrow-exporter .
-ENV BURROW_ADDR http://localhost:8000
-ENV METRICS_ADDR 0.0.0.0:8080
-ENV INTERVAL 30
-ENV API_VERSION 2
+#ENV BURROW_ADDR http://localhost:8000
+#ENV METRICS_ADDR 0.0.0.0:8080
+#ENV INTERVAL 30
+#ENV API_VERSION 2
 CMD ./burrow-exporter --burrow-addr $BURROW_ADDR --metrics-addr $METRICS_ADDR --interval $INTERVAL --api-version $API_VERSION

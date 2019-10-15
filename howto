@@ -1,3 +1,4 @@
 1. git clone https://github.com/linkedin/Burrow.git
 2. git clone https://github.com/cloudworkz/kafka-minion.git
 3. git clone https://github.com/jirwin/burrow_exporter.git
+4. git clone https://github.com/prometheus/prometheus.git

@@ -1,25 +1,25 @@
 [zookeeper]
-servers=[ "192.168.2.67:2181", "192.168.2.67:2182", "192.168.2.67:2183" ]
+servers=[ "zookeeper:2181" ]
 timeout=6
 root-path="/burrow"
 
 [cluster.local]
 class-name="kafka"
-servers=[ "192.168.2.67:9092", "192.168.2.67:9093", "192.168.2.67:9094" ]
+servers=[ "kafka:9092" ]
 topic-refresh=60
 offset-refresh=30
 
 [consumer.local]
 class-name="kafka"
 cluster="local"
-servers=[ "192.168.2.67:9092", "192.168.2.67:9093", "192.168.2.67:9094" ]
+servers=[ "kafka:9092" ]
 group-blacklist="^(console-consumer-|python-kafka-consumer-).*$"
 group-whitelist=""
 
 [consumer.local_zk]
 class-name="kafka_zk"
 cluster="local"
-servers=[ "192.168.2.67:2181", "192.168.2.67:2182", "192.168.2.67:2183" ]
+servers=[ "zookeeper:2181" ]
 zookeeper-path="/local"
 zookeeper-timeout=30
 group-blacklist="^(console-consumer-|python-kafka-consumer-).*$"

@@ -4,8 +4,8 @@ services:
     build:
       context: ./Burrow
       args:
-        BURROW_KAFKA_BROKERS: '[ "192.168.2.67:9092", "192.168.2.67:9093", "192.168.2.67:9094" ]'
-        BURROW_ZK_CONN: '[ "192.168.2.67:2181", "192.168.2.67:2182", "192.168.2.67:2183" ]'
+        BURROW_KAFKA_BROKERS: '[ "192.168.2.39:9092", "192.168.2.39:9093", "192.168.2.39:9094" ]'
+        BURROW_ZK_CONN: '[ "192.168.2.39:2181", "192.168.2.39:2182", "192.168.2.39:2183" ]'
     image: "chenchuk/burrow:1.0"
     volumes:
       - ${PWD}/Burrow/docker-config:/etc/burrow/
@@ -13,4 +13,36 @@ services:
     ports:
       - 8000:8000
     restart: always
+  
+  burrow-dashboard:
+    image: joway/burrow-dashboard:latest
+    ports:
+      - 90:80
+    environment:
+      #      BURROW_BACKEND: "http://localhost:8000"
+      BURROW_BACKEND: "http://burrow:8000"
+    depends_on:
+      - burrow
+ 
+  kafka-minion:
+    build: ./kafka-minion
+    image: "chenchuk/kafka-minion:1.0"
+    ports:
+      - 7070:8080
+    environment:
+      KAFKA_BROKERS: "192.168.2.39:9092,192.168.2.39:9093,192.168.2.39:9094"
+ 
+  burrow-exporter:
+    build: ./burrow_exporter
+    image: "chenchuk/burrow_exportes:1.0"
+    ports:
+      - 8880:8880
+    environment:
+      BURROW_ADDR: "http://burrow:8000"
+      METRICS_ADDR: "0.0.0.0:8880"
+      INTERVAL: 30
+      API_VERSION: 3
+    depends_on:
+      - burrow
+ 
 

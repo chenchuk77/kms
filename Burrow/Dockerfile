@@ -9,6 +9,8 @@ RUN go mod tidy && go build -o /tmp/burrow .
 # stage 2: runner
 FROM alpine:3.10
 LABEL maintainer="LinkedIn Burrow https://github.com/linkedin/Burrow"
+ARG BURROW_KAFKA_BROKERS
+ARG BURROW_ZK_CONN
 COPY --from=builder /tmp/burrow /app/
 ADD /docker-config/burrow.toml /app/config/burrow.toml
 
