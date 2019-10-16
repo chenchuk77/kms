@@ -45,11 +45,11 @@ The project target is to create a simple and robust environment running those to
 ### KMS structure
 KMS uses docker-compose technology to wire up the underlying docker containers. the docker-compose.yml file contains the KMS services and configurations.
 
-### default setup
-the 'complete' setup is used by default (6 containers). if u want a different setup, just comment out the unnecesary services from docker-compose.yml 
+### Default setup
+The 'Complete' setup is used by default (6 containers). if u want a different setup, just comment out the unnecesary services from docker-compose.yml 
 
-### dependencies
-a running kafka is required.
+### Dependencies
+A running kafka is required.
 
 ### Environment setup options
 KMS monitors kafka in 3 different ways:
@@ -135,15 +135,21 @@ orchestration of multi-container services using Docker-compose technology.
 * [Prometheus](https://hub.docker.com/r/prom/prometheus) - Systems and service monitoring system.
 * [Grafana](https://github.com/grafana/grafana) - Grafana allows you to query, visualize, alert on and understand your metrics.
 
-### Tips and notes
-* burrow-on-grafana setup has extra container. this is because burrow cant expose metrics in Prometheus format. 
-* note the convention through this project for clarification:
+### Tips and Notes
+* Burrow-on-grafana setup has extra container. this is because burrow cant expose metrics in Prometheus format. 
+* Note the convention through this project for clarification:
   * kafka data - row data from kafka
   * kafka metrics - prometheus formated data
-  * scrape - read data and expose as prometheus formatted metric. 
+  * scrape - read data and expose as prometheus formatted metric.
+* Each Prometheus scrapper (prometheus/kafka-minion/burrow-exporter) is listening on /metrics
+  * http://localhost:9090/metrics # Prometheus 
+  * http://localhost:7070/metrics # Kafka-minion
+  * http://localhost:8880/metrics # Burrow-exporter
+                
 
 ### TODOs
 * Support dynamic kafka zookeeper connection-string (variable num of brokers)
 * Add system picture
 * Support profiles (setup )
+* Ddd grafana dashboards for provisioning
 
