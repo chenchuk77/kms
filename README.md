@@ -7,6 +7,9 @@ KMS is a collection of kafka tools for monitoring and visualizing a Kafka cluste
 After a lot of search about how to monitor kafka, it turns out that there are many ways but it was very difficult to setup the configiration.
 The project target is to create a simple and robust environment running those tools
 
+### KMS containers
+![](kms.png)
+
 ### KMS containers roles
 * Burrow:
   * Burrow connects to Kafka brokers and Zookeeper hosts
@@ -149,7 +152,8 @@ orchestration of multi-container services using Docker-compose technology.
 
 ### TODOs
 * Support dynamic kafka zookeeper connection-string (variable num of brokers)
-* Add system picture
+* Update system picture
 * Support profiles (setup )
-* Ddd grafana dashboards for provisioning
+* Add grafana dashboards for provisioning
+
 
